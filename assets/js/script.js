@@ -192,7 +192,7 @@ $(".card .list-group").sortable({
   out: function (event) {
     console.log("out", event.target);
   },
-  update: function () {
+  update: function() {
     // array to store the task data in
     var tempArr = [];
 
@@ -215,15 +215,30 @@ $(".card .list-group").sortable({
       });
     });
 
-            // trim down list's ID to match object property
-            var arrName = $(this)
-            .attr("id")
-            .replace("list-", "");
-    
-          // update array on tasks object and save
-          tasks[arrName] = tempArr;
-          saveTasks();
+    // trim down list's ID to match object property
+    var arrName = $(this)
+      .attr("id")
+      .replace("list-", "");
+
+    // update array on tasks object and save
+    tasks[arrName] = tempArr;
+    saveTasks();
     console.log(tempArr);
+  }
+});
+
+$("#trash").droppable({
+  accept: ".card .list-group-item",
+  tolerance: "touch",
+  drop: function (event, ui) {
+    ui.draggable.remove();
+    console.log("drop");
+  },
+  over: function (event, ui) {
+    console.log("over");
+  },
+  out: function (event, ui) {
+    console.log("out");
   }
 });
 
